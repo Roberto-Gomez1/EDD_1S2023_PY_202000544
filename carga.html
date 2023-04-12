@@ -18,7 +18,9 @@
 
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
 </head>
 
 <body id="page-top">
@@ -57,15 +59,6 @@
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    <ul class="navbar-nav mr-auto">
-                      <li class="nav-item">
-                        <select class="form-control mr-3" id="select-options">
-                          <option value="option1">In-Orden</option>
-                          <option value="option2">Pre-Orden</option>
-                          <option value="option3">Post-Orden</option>
-                        </select>
-                      </li>
-                    </ul>
                     <ul class="navbar-nav ml-auto">
                       <div class="topbar-divider d-none d-sm-block"></div>
                       <li class="nav-item dropdown no-arrow">
@@ -85,9 +78,15 @@
                       </li>
                     </ul>
                   </nav>
+                  <button id="graficar">Graficar</button>
+                  <button id="limpiar">Limpiar</button>
+                  
+                  <div>
+                    <img id="image">
+                </div>  
                 </div>
             </div>
-        </div>  
+        </div>
         </div>
     </div>
 

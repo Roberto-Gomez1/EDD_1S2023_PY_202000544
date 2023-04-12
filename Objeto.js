@@ -139,11 +139,14 @@ function agregarEventos() {
             });
             }
           });
-          
     document.getElementById("graficar").addEventListener("click", function(){
-    let url = 'https://quickchart.io/graphviz?graph=';
-    let body = arbolBinarioAVL.grafica_arbol();
-    $("#image").attr("src", url + body);
+        const data = JSON.parse(localStorage.getItem("alumnos"));
+        data.forEach((alumno) => {
+            arbolBinarioAVL.insertaValor(alumno);
+        });
+        let url = 'https://quickchart.io/graphviz?graph=';
+        let body = arbolBinarioAVL.grafica_arbol();
+        $("#image").attr("src", url + body);
     });
 }
 

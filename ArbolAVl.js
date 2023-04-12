@@ -144,70 +144,49 @@ class ArbolAVL {
         var numero = id + 1;
         if(!(raiz === null)){
             cadena += "\"";
-            cadena += raiz.valor;
+            cadena += raiz.valor.carnet;
             cadena += "\" ;";
             if(!(raiz.izquierdo === null) && !(raiz.derecho === null)){
                 cadena += " x" + numero + " [label=\"\",width=.1,style=invis];"
                 cadena += "\"";
-                cadena += raiz.valor;
+                cadena += raiz.valor.carnet;
                 cadena += "\" -> ";
                 cadena += this.retornarValoresArbol(raiz.izquierdo, numero)
                 cadena += "\"";
-                cadena += raiz.valor;
+                cadena += raiz.valor.carnet;
                 cadena += "\" -> ";
                 cadena += this.retornarValoresArbol(raiz.derecho, numero)
-                cadena += "{rank=same" + "\"" + raiz.izquierdo.valor + "\"" + " -> " + "\"" + raiz.derecho.valor + "\""  + " [style=invis]}; "
+                cadena += "{rank=same" + "\"" + raiz.izquierdo.valor.carnet + "\"" + " -> " + "\"" + raiz.derecho.valor.carnet + "\""  + " [style=invis]}; "
             }else if(!(raiz.izquierdo === null) && (raiz.derecho === null)){
                 cadena += " x" + numero + " [label=\"\",width=.1,style=invis];"
                 cadena += "\"";
-                cadena += raiz.valor;
+                cadena += raiz.valor.carnet;
                 cadena += "\" -> ";
                 cadena += this.retornarValoresArbol(raiz.izquierdo, numero)
                 cadena += "\"";
-                cadena += raiz.valor;
+                cadena += raiz.valor.carnet;
                 cadena += "\" -> ";
                 cadena += "x" + numero + "[style=invis]";
-                cadena += "{rank=same" + "\"" + raiz.izquierdo.valor + "\"" + " -> " + "x" + numero + " [style=invis]}; "
+                cadena += "{rank=same" + "\"" + raiz.izquierdo.valor.carnet + "\"" + " -> " + "x" + numero + " [style=invis]}; "
             }else if((raiz.izquierdo === null) && !(raiz.derecho === null)){
                 cadena += " x" + numero + " [label=\"\",width=.1,style=invis];"
                 cadena += "\"";
-                cadena += raiz.valor;
+                cadena += raiz.valor.carnet;
                 cadena += "\" -> ";
                 cadena += "x" + numero + "[style=invis]";
                 cadena += "; \"";
-                cadena += raiz.valor;
+                cadena += raiz.valor.carnet;
                 cadena += "\" -> ";
                 cadena += this.retornarValoresArbol(raiz.derecho, numero)
-                cadena += "{rank=same" + " x" + numero + " -> \"" + raiz.derecho.valor + "\"" +  " [style=invis]}; "
+                cadena += "{rank=same" + " x" + numero + " -> \"" + raiz.derecho.valor.carnet + "\"" +  " [style=invis]}; "
             }
         }
         return cadena;
     }
 
+
     eliminarTodo(){
         this.raiz = null;
     }
 
-    graficar(){
-        refrescarArbol();
-    }
-
-}
-
-
-const arbolBinarioAVL = new ArbolAVL();
-
-
-function limpiar(){
-    arbolBinarioAVL.eliminarTodo();
-    let url = 'https://quickchart.io/graphviz?graph=digraph G { arbol }';
-    $("#image").attr("src", url);
-    document.getElementById("valor").value = "";
-}
-
-function refrescarArbol(){
-    let url = 'https://quickchart.io/graphviz?graph=';
-    let body = arbolBinarioAVL.grafica_arbol();
-    $("#image").attr("src", url + body);
-    document.getElementById("valor").value = "";
 }
