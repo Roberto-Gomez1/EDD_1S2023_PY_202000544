@@ -146,9 +146,6 @@ class Arbol {
         return cadena
     }
 
-    /** 
-     * Contenido de graficar los diferentes recorridos del arbol
-     */
     recorridosArbol(){
         console.log("Recorrido Pre-Orden")
         let url = 'https://quickchart.io/graphviz?graph=';
