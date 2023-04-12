@@ -1,13 +1,14 @@
+import { Alumno } from "./Objeto.js";
 class nodoArbol {
-    constructor(valor){
+    constructor(Alumno){
         this.izquierdo = null;
         this.derecho = null;
-        this.valor = valor;
+        this.valor = Alumno;
         this.altura = 1;
         this.factor_equilibrio = 0;
     }
 }
-
+export {ArbolAVL,nodoArbol}
 class ArbolAVL {
     constructor(){
         this.raiz = null;
@@ -79,11 +80,52 @@ class ArbolAVL {
         return raiz
     }
 
-
     insertaValor(valor){
         const nuevoNodo = new nodoArbol(valor);
         this.raiz = this.insertarValorHijo(nuevoNodo,this.raiz);
     }
+    
+    recorridoPreorden(raiz){
+        var cadena = []
+        if(raiz !== null){
+            cadena.push(raiz.valor)
+            if(raiz.izquierdo !== null){
+                cadena.push(...this.recorridoPreorden(raiz.izquierdo))
+            }
+            if(raiz.derecho !== null){
+                cadena.push(...this.recorridoPreorden(raiz.derecho))
+            }
+        }
+        return cadena
+    }
+    
+    recorridoInorden(raiz) {
+        var cadena = []
+        if (raiz !== null) {
+          if (raiz.izquierdo !== null) {
+            cadena = [...cadena, ...this.recorridoInorden(raiz.izquierdo)]
+          }
+          cadena.push(raiz.valor)
+          if (raiz.derecho !== null) {
+            cadena = [...cadena, ...this.recorridoInorden(raiz.derecho)]
+          }
+        }
+        return cadena
+      }
+
+      recorridoPostOrden(raiz){
+        var cadena = []
+        if(raiz !== null){
+            if(raiz.izquierdo !== null){
+                cadena = cadena.concat(this.recorridoPostOrden(raiz.izquierdo))
+            }
+            if(raiz.derecho !== null){
+                cadena = cadena.concat(this.recorridoPostOrden(raiz.derecho))
+            }
+            cadena.push(raiz.valor)
+        }
+        return cadena
+    }    
 
     grafica_arbol(){
         var cadena = "";
@@ -146,23 +188,15 @@ class ArbolAVL {
         this.raiz = null;
     }
 
+    graficar(){
+        refrescarArbol();
+    }
+
 }
 
 
 const arbolBinarioAVL = new ArbolAVL();
 
-function agregarVariosNumeros(){
-    let valor = document.getElementById("valor").value;
-    let valores = valor.split(',');
-    try {
-        valores.forEach((numero) => {
-            arbolBinarioAVL.insertaValor(parseInt(numero))
-        });
-    } catch (error) {
-        console.log(error)
-    }
-    refrescarArbol();
-}
 
 function limpiar(){
     arbolBinarioAVL.eliminarTodo();
@@ -176,20 +210,4 @@ function refrescarArbol(){
     let body = arbolBinarioAVL.grafica_arbol();
     $("#image").attr("src", url + body);
     document.getElementById("valor").value = "";
-}
-
-const inputElement = document.getElementById("input");
-inputElement.addEventListener("change", onChange, false);
-function onChange(event) {
-    var reader = new FileReader();
-    reader.onload = onReaderLoad;
-    reader.readAsText(event.target.files[0]);
-}
-
-function onReaderLoad(event){
-    var obj = JSON.parse(event.target.result);
-    for(var i = 0; i < obj.numeros.length; i++){
-        arbolBinarioAVL.insertaValor(obj.numeros[i].valor)
-    }
-    refrescarArbol();
 }
